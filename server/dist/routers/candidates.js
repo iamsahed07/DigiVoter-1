@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const candidate_1 = require("#/controllars/candidate");
+const validator_1 = require("#/middleware/validator");
+const validationSchema_1 = require("#/utils/validationSchema");
+const express_1 = require("express");
+const router = (0, express_1.Router)();
+router.post("/add-candidate", (0, validator_1.validate)(validationSchema_1.CandidateValidation), candidate_1.addCandidate);
+router.get("/get-based-on-assembly", candidate_1.getAllCandidateBasedOnAssembly);
+exports.default = router;
