@@ -9,7 +9,7 @@ export const SignUp = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen pb-5 bg-blue-300 ">
       <img 
-      className="w-12 mt-6 rounded-full md:w-20 md:mt-10" src="https://wallpapers-clan.com/wp-content/uploads/2022/08/default-pfp-1.jpg" alt="" />
+      className="w-12 mt-6 rounded-full md:w-20 md:mt-10" src="/src/assets/pfp2.png" alt="" />
       <img 
       className="hidden mt-6 rounded-full w-9 md:w-20 md:mt-10" 
       src="./src/assets/profile-pic1.jpg" alt="" />

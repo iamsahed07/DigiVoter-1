@@ -30,6 +30,7 @@ const router = createBrowserRouter(
         <Route path="candidate/:id" element={<Candidate />} />
         </Route>
         <Route path="voting-result" element={<VotingResult />} />
+        {/* <Route path="/logout" element={<Login/>} /> */}      
       </Route>
     </Route>
   )

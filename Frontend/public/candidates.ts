@@ -3,8 +3,8 @@ export const data = [
     _id: {
       $oid: "65ec67121e5405ba86c53b0c",
     },
-    candidateName: "Sahed Ali",
-    party: "TMC",
+    candidateName: "VIJAY KUMAR",
+    party: "INC",
     assembly: "Farakka",
     createdAt: {
       $date: "2024-03-09T13:41:38.084Z",
@@ -18,8 +18,8 @@ export const data = [
     _id: {
       $oid: "65ec675bc0cd647d8d5afe80",
     },
-    candidateName: "Mahafujul Haque",
-    party: "TMC",
+    candidateName: "NITESH SHARMA",
+    party: "BJP",
     assembly: "Farakka",
     createdAt: {
       $date: "2024-03-09T13:42:51.871Z",
@@ -33,7 +33,7 @@ export const data = [
     _id: {
       $oid: "65ec6775c0cd647d8d5afe82",
     },
-    candidateName: "Rafeh Qureshi",
+    candidateName: "JEET GANGULY",
     party: "TMC",
     assembly: "Topsia",
     createdAt: {
@@ -48,8 +48,8 @@ export const data = [
     _id: {
       $oid: "65f81c14ceb31e314f9be2ed",
     },
-    candidateName: "Abhinay Raj",
-    party: "BJP",
+    candidateName: "ASHOK SAMA",
+    party: "CPIM",
     assembly: "Farakka",
     createdAt: {
       $date: "2024-03-18T10:48:52.371Z",
@@ -63,7 +63,7 @@ export const data = [
     _id: {
       $oid: "65f81c5cceb31e314f9be2ef",
     },
-    candidateName: "Virat Samaj",
+    candidateName: "VIRAT RAJPUT",
     party: "INC",
     assembly: "Nadia",
     createdAt: {

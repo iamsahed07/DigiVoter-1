@@ -1,9 +1,9 @@
 import { Container } from "./Container";
 
-function CandidateCard({ className = "", url="", candidateName="", party="",width="44"}) {
+function CandidateCard({ className = "", url="", candidateName="", party="",width="44",height='44'}) {
   return (
     <Container  width={width}>
-      <div className={`mb-1 h-${width}`}>
+      <div className={`mb-1 h-${width} h-${height}`}>
         <img
           src={url}
           className={`object-cover mb-1 bg-white shadow-lg ${className} rounded-2xl`}

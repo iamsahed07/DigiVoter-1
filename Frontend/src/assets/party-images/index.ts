@@ -1,6 +1,6 @@
 import BJP from "./BJP.png"
 import TMC from "./TMC.png"
-import CPIM from "./CPI(M).png"
+import CPIM from "./CPIM.png"
 import INC from "./INC.png"
 
 export const IMAGES = [
@@ -13,7 +13,7 @@ export const IMAGES = [
         url: TMC
     },
     {
-        name:"CPI(M)",
+        name:"CPIM",
         url: CPIM
     },
     {

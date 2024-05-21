@@ -39,6 +39,7 @@ function Login() {
       }catch(error){
         console.log("inside aadhar")
       }
+      alert("use aadhar")
     }else{
       const { data } = await client.post(
         "/auth/sendVerificationToken",
@@ -53,6 +54,7 @@ function Login() {
         }
       );
       console.log(data);
+      alert("use Mobile")
     }
   }
 
@@ -116,7 +118,6 @@ function Login() {
               {loginChoice === "mobile-number" ? (
                 <input
                   type="text"
-                  name="mobile-number"
                   className="block w-full px-3 py-1 my-2 text-sm outline-none border-[2px] focus:bg-[#E9ECF1] border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none "
                   placeholder="Mobile Number"
                   value={loginInfo.mobile}
@@ -127,7 +128,6 @@ function Login() {
               ) : (
                 <input
                   type="text"
-                  name="aadhaar"
                   className="block w-full px-3 py-1 my-2 text-sm outline-none border-[2px] focus:bg-[#E9ECF1] border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none "
                   placeholder="Aadhaar"
                   value={loginInfo.aadhaar}
@@ -142,7 +142,6 @@ function Login() {
 
               <input
                 type="text"
-                name="PIN"
                 className="block w-full px-3 py-1 my-2 text-sm  outline-none border-[2px] focus:bg-[#E9ECF1] border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none "
                 placeholder="6 digit security PIN"
                 value={loginInfo.pin}

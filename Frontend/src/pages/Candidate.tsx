@@ -17,10 +17,13 @@ function Candidate() {
 
   if (obj !== undefined) {
     return (
-      <div className="flex flex-col w-3/4 float-right mr-10 h-screen">
+      <div>
+
+      <div className="w-3/4 h-screen mx-auto flex">
         <CandidateCard
-          width={"60"}
-          className={"h-60 w-60"}
+        width="80"
+        height ='80'
+          className={""}
           url={image?.url}
           candidateName={obj.candidateName}
           party={obj.party}
@@ -32,7 +35,7 @@ function Candidate() {
               disableButton ? "bg-[#B3ADED]" : "bg-[#4C3EDB]"
             } text-white text-sm py-2 font-medium w-full rounded-md`}
             disabled={disableButton}
-          >
+            >
             Cast Your Vote
           </button>
           <div className="flex mt-4">
@@ -53,6 +56,7 @@ function Candidate() {
           </div>
         </div>
       </div>
+            </div>
     );
   } else return <h1>Candidate not found</h1>;
 }
