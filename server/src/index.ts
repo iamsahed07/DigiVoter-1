@@ -1,8 +1,10 @@
 import express from "express";
 import dotenv from 'dotenv'
+import cors from 'cors'
 dotenv.config()
 import "./db/dbConfig";
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 8000;
 import authRouter from '#/routers/auth';
 import elections from "#/routers/elections"

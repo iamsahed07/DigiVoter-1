@@ -3,6 +3,7 @@ import { Container } from "../components/Container";
 import { useNavigate } from "react-router-dom";
 import client from "../api/client";
 
+
 function Login() {
   const [loginChoice, setLoginChoice] = useState("aadhaar");
   const [loginInfo, setLoginInfo] = useState({
@@ -10,18 +11,61 @@ function Login() {
     aadhaar: "",
     pin: "",
   });
-  console.log(loginInfo);
+  // console.log(loginInfo);
 
   const navigate = useNavigate();
   const handlelogin = async()=>{
-     const { data } = await client.post("/auth/sign-in", {
-       adhar:loginInfo.aadhaar,
-       token:loginInfo.pin
-     });
-     console.log(data);
+    let response;
+    if (loginChoice === "aadhaar") {
+      try {
+        const { data } = await client.post(
+          "/auth/sign-in",
+          {
+            adhar: loginInfo.aadhaar,
+            token: loginInfo.pin,
+          },
+          {
+            params: {
+              useAdhar: "yes",
+              useMobile: "no",
+            },
+          }
+        );
+        response = data;
+      } catch (error) {
+        alert("aadhar or pin invalid");
+        return;
+      }
+    } else {
+      try {
+        const { data } = await client.post(
+          "/auth/sign-in",
+          {
+            mobile: loginInfo.mobile,
+            token: loginInfo.pin,
+          },
+          {
+            params: {
+              useAdhar: "no",
+              useMobile: "yes",
+            },
+          }
+        );
+        response = data;
+      } catch (error) {
+        alert("mobile or pin invalid");
+        return;
+      }
+    }
+    localStorage.setItem("token",response.jwttoken)
+    navigate("/information");
   }
   const handleGetOtp = async()=>{
     if (loginChoice === "aadhaar"){
+      if(loginInfo.aadhaar.length !== 12){
+        alert("invalid aadhar");
+        return;
+      }
       try{
         const { data } = await client.post(
           "/auth/sendVerificationToken",
@@ -35,26 +79,33 @@ function Login() {
             },
           }
         );
-        console.log(data);
+        alert(data.message);
       }catch(error){
-        console.log("inside aadhar")
+        alert("some thing went wrong")
       }
-      alert("use aadhar")
     }else{
-      const { data } = await client.post(
-        "/auth/sendVerificationToken",
-        {
-          mobile: loginInfo.mobile,
-        },
-        {
-          params: {
-            useAdhar: "no",
-            useMobile: "yes",
+      if (loginInfo.mobile.length !== 10) {
+        alert("invalid mobile number");
+        return;
+      }
+      try{
+        const { data } = await client.post(
+          "/auth/sendVerificationToken",
+          {
+            mobile: loginInfo.mobile,
           },
-        }
-      );
-      console.log(data);
-      alert("use Mobile")
+          {
+            params: {
+              useAdhar: "no",
+              useMobile: "yes",
+            },
+          }
+        );
+          alert(data.message);
+      }catch(error){
+        alert("Something went wrong")
+      }
+      
     }
   }
 
@@ -114,7 +165,7 @@ function Login() {
                 Aadhar number
               </label>
             </div>
-            <form action="">
+            <div>
               {loginChoice === "mobile-number" ? (
                 <input
                   type="text"
@@ -152,9 +203,9 @@ function Login() {
               <button className="bg-[#116ACF] text-[#E7FFF2] py-2 mt-2 mb-5 rounded-md w-[100%] " onClick={handlelogin}>
                 Login
               </button>
-            </form>
+            </div>
           </Container>
-          <div className="flex justify-center gap-1">
+          {/* <div className="flex justify-center gap-1">
             <h2 className="font-bold text-[#000005] ">
               Do not have an account ?
             </h2>
@@ -164,7 +215,7 @@ function Login() {
             >
               Sign Up
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

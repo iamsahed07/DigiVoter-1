@@ -19,7 +19,7 @@ import Profile from "./pages/Profile";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<OuterLayout />}>
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route element={<InnerLayout />}>
         <Route path="information" element={<Information />} />
