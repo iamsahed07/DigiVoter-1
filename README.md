@@ -1,1 +1,1 @@
-this i digivoter application
+this is digivoter application
