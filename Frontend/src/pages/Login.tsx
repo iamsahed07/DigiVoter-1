@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Container } from "../components/Container";
 import { useNavigate } from "react-router-dom";
 import client from "../api/client";
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../store/auth";
 
 
 function Login() {
@@ -32,6 +34,7 @@ function Login() {
           }
         );
         response = data;
+        // dispatch(updateProfile(data.profile));
       } catch (error) {
         alert("aadhar or pin invalid");
         return;
@@ -52,11 +55,13 @@ function Login() {
           }
         );
         response = data;
+        // dispatch(updateProfile(data.profile));
       } catch (error) {
         alert("mobile or pin invalid");
         return;
       }
     }
+    console.log(response);
     localStorage.setItem("token",response.jwttoken)
     navigate("/information");
   }

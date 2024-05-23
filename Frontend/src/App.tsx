@@ -11,7 +11,7 @@ import { Information } from "./pages/Information";
 import { VoterRegistration } from "./pages/VoterRegistration";
 import { VotingArea } from "./pages/VotingArea";
 import { VotingResult } from "./pages/VotingResult";
-import { SignUp } from "./pages/SignUp";
+// import { SignUp } from "./pages/SignUp";
 import ElectionLayout from "./components/ElectionLayout";
 import Candidate from "./pages/Candidate";
 import Profile from "./pages/Profile";
@@ -19,8 +19,8 @@ import Profile from "./pages/Profile";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<OuterLayout />}>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/" element={<Login />} />
+      {/* <Route path="/signup" element={<SignUp />} /> */}
       <Route element={<InnerLayout />}>
         <Route path="information" element={<Information />} />
         <Route path="voter-registration" element={<VoterRegistration />} />

@@ -12,6 +12,7 @@ export interface CreateUser extends Request {
     mobile: string;
     address: string;
     assembly: string;
+    imageurl:string;
   };
 }
 
@@ -57,6 +58,7 @@ declare global {
         age:number;
         assembly:string;
         state:string;
+        imageurl:string;
       };
       token: string;
     }
@@ -79,6 +81,7 @@ export interface requestCandidate extends Request {
     mobile: string;
     address: string;
     age: number;
-    state:string
+    state: string;
+    imageurl: string;
   };
 }

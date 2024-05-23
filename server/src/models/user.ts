@@ -14,6 +14,7 @@ export interface UserDocument {
   voterId: string;
   mobile: string;
   address: string;
+  imageurl:string;
 }
 interface Voter extends UserDocument{
   tokens: string[]; //store auth tokens
@@ -77,6 +78,10 @@ const userSchema = new Schema<Voter, {}, Methods>(
       type: String,
       trim: true,
       required: true,
+    },
+    imageurl: {
+      type: String,
+      trim: true,
     },
   },
   { timestamps: true }

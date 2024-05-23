@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { FaCheckSquare } from "react-icons/fa";
 import { MdHowToVote } from "react-icons/md";
@@ -7,6 +7,14 @@ import { MdPoll } from "react-icons/md";
 import { IoLogOutOutline } from "react-icons/io5";
 
 export const Drawer = () => {
+  const navigate = useNavigate();
+  const logoutHandler = ()=>{
+    const result = confirm("Are you sure, you want to logout?");
+    if(result){
+      navigate("/")
+      localStorage.clear()
+    }
+  }
   return (
     <div className="relative col-span-2">
       <nav className="h-screen bg-[#F2F3F6] flex flex-col items-start px-5 pt-7 drop-shadow-2xl fixed text-[#9A9FA3] text-sm font-bold">
@@ -62,20 +70,22 @@ export const Drawer = () => {
           </IconContext.Provider>
           <h3 className="ml-2">Result</h3>
         </NavLink>
-        <NavLink
-          to="logout"
-          className={({ isActive }) =>
-            isActive
-              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#00BDDA] text-[#E5F8FB] rounded-md"
-              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#B3E6F2] hover:text-[#007C92] hover:rounded-md"
-          }
+        <div
+          className="flex py-2 px-3 my-2 w-[100%] hover:bg-[#B3E6F2] rounded-md cursor-pointer"
+          onClick={logoutHandler}
         >
           <IconContext.Provider value={{ size: "1.5em" }}>
             <IoLogOutOutline />
           </IconContext.Provider>
           <h3 className="ml-2">Log out</h3>
-        </NavLink>
+        </div>
       </nav>
     </div>
   );
 };
+// to="logout"
+//           className={({ isActive }) =>
+//             isActive
+//               ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#00BDDA] text-[#E5F8FB] rounded-md"
+//               : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#B3E6F2] hover:text-[#007C92] hover:rounded-md"
+//           }
