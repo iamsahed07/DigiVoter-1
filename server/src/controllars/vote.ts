@@ -10,8 +10,8 @@ export const giveVote = async (req: GiveVote, res: Response) => {
     const isVoted = await GivenVote.findOne({ voterRef: id });
     if (isVoted) {
       return res
-        .status(400)
-        .json({ error: "Vote is already given by the voter!!", success: false });
+        .status(200)
+        .json({ error: "Vote was already given by this Id!!", success: false });
     }
 
     const voteData = await VoteData.findOne({ candidateRef: candidateId });

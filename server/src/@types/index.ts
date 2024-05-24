@@ -36,8 +36,8 @@ export interface VerifyWhenLogIn extends Request {
 
 export const role = ["Admin","Voter","Candidate"];
 export type roleType = "Admin" | "User";
-export const party = ["INC", "BJP", "TMC","BSP"];
-export type partyType = "INC" | "BJP" | "TMC" | "BSP";
+export const party = ["INC", "BJP", "TMC","BSP","CPIM"];
+export type partyType = "INC" | "BJP" | "TMC" | "BSP" | "CPIM";
 export const status = ["LIVE", "UPCOMING"];
 export type statusType = "LIVE" | "UPCOMING";
 

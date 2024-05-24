@@ -40,6 +40,7 @@ export const addCandidate: RequestHandler = async (
     const candidatesAsAssembly = await CandidatesAsAssembly.findOne({assembly})
     if(candidatesAsAssembly){
         candidatesAsAssembly.candidates.push(newCandidate._id);
+        await candidatesAsAssembly.save()
     }else{
         const newCandidateAsAssembly = new CandidatesAsAssembly({ assembly });
         newCandidateAsAssembly.candidates.push(newCandidate._id);
@@ -59,10 +60,12 @@ export async function getAllCandidateBasedOnAssembly(req: any, res: any) {
   try {
     const { assembly } = req.body;
     const candidates = await Candidate.find({ assembly });
+    const cadidateBasedAssembly = await CandidatesAsAssembly.findOne({ assembly });
     res.status(200).json({
       message: "Candidate successfully fetched",
       success: true,
       candidates,
+      id: cadidateBasedAssembly?._id,
     });
   } catch (err: any) {
     res.status(500).json({ message: err.message, success: false });

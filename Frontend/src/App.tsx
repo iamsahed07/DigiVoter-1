@@ -24,13 +24,16 @@ const router = createBrowserRouter(
       <Route element={<InnerLayout />}>
         <Route path="information" element={<Information />} />
         <Route path="voter-registration" element={<VoterRegistration />} />
-        <Route path="profile" element={<Profile/>} />
+        <Route path="profile" element={<Profile />} />
         <Route path="voting-area" element={<ElectionLayout />}>
-        <Route index element={<VotingArea />} />
-        <Route path="candidate/:id" element={<Candidate />} />
+          <Route index element={<VotingArea />} />
+          <Route
+            path="candidate/:CandidateId/:ElectionId/:CanAsAssemblyId"
+            element={<Candidate />}
+          />
         </Route>
         <Route path="voting-result" element={<VotingResult />} />
-        {/* <Route path="/logout" element={<Login/>} /> */}      
+        {/* <Route path="/logout" element={<Login/>} /> */}
       </Route>
     </Route>
   )

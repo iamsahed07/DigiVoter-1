@@ -2,7 +2,7 @@ import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
 import { RootState } from ".";
 
 export interface CandidateProfile {
-  id: any;
+  _id: any;
   name: string;
   email: string;
   verified: boolean;
@@ -20,11 +20,15 @@ export interface CandidateProfile {
 }
 
 interface CandidateState {
+  candidateAsAssemblyId: string | null;
   profiles: [CandidateProfile] | null;
+  assembly:string | null;
 }
 
 const initialState: CandidateState = {
+  candidateAsAssemblyId:null,
   profiles: null,
+  assembly:null
 };
 
 const slice = createSlice({
@@ -35,13 +39,18 @@ const slice = createSlice({
       CandidateState,
       {payload}: PayloadAction<[CandidateProfile] | null>
     ) {
-      CandidateState.profiles = payload;
+      CandidateState.profiles = payload
     },
+    updateCandidateAsAssemblyId(
+      CandidateState,
+      {payload}: PayloadAction< string | null>
+    ){
+      CandidateState.candidateAsAssemblyId = payload
+    }
   },
 });
 
-export const { updateCandidateProfile } =
-  slice.actions;
+export const { updateCandidateProfile, updateCandidateAsAssemblyId } = slice.actions;
 
 export const getCandidateState = createSelector(
   (state: RootState) => state,
