@@ -23,10 +23,6 @@ const voteSchema = new Schema<voteDocument>(
       type: Schema.Types.ObjectId,
       ref: "CandidatesAsAssembly",
       required: true,
-    },
-    votes:{
-        type:Number,
-        default:0
     }
   },
   { timestamps: true }

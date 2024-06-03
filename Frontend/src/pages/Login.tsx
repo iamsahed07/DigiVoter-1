@@ -1,10 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Container } from "../components/Container";
 import { useNavigate } from "react-router-dom";
 import client from "../api/client";
-import { useDispatch } from "react-redux";
-import { updateProfile } from "../store/auth";
-
 
 function Login() {
   const [loginChoice, setLoginChoice] = useState("aadhaar");
@@ -13,122 +10,69 @@ function Login() {
     aadhaar: "",
     pin: "",
   });
-  // console.log(loginInfo);
 
   const navigate = useNavigate();
-  const handlelogin = async()=>{
-    let response;
-    if (loginChoice === "aadhaar") {
-      try {
-        const { data } = await client.post(
-          "/auth/sign-in",
-          {
-            adhar: loginInfo.aadhaar,
-            token: loginInfo.pin,
-          },
-          {
-            params: {
-              useAdhar: "yes",
-              useMobile: "no",
-            },
-          }
-        );
-        response = data;
-        // dispatch(updateProfile(data.profile));
-      } catch (error) {
-        alert("aadhar or pin invalid");
-        return;
-      }
-    } else {
-      try {
-        const { data } = await client.post(
-          "/auth/sign-in",
-          {
-            mobile: loginInfo.mobile,
-            token: loginInfo.pin,
-          },
-          {
-            params: {
-              useAdhar: "no",
-              useMobile: "yes",
-            },
-          }
-        );
-        response = data;
-        // dispatch(updateProfile(data.profile));
-      } catch (error) {
-        alert("mobile or pin invalid");
-        return;
-      }
-    }
-    console.log(response);
-    localStorage.setItem("token",response.jwttoken)
-    navigate("/information");
-  }
-  const handleGetOtp = async()=>{
-    if (loginChoice === "aadhaar"){
-      if(loginInfo.aadhaar.length !== 12){
-        alert("invalid aadhar");
-        return;
-      }
-      try{
-        const { data } = await client.post(
-          "/auth/sendVerificationToken",
-          {
-            adhar: loginInfo.aadhaar,
-          },
-          {
-            params: {
-              useAdhar: "yes",
-              useMobile: "no",
-            },
-          }
-        );
-        alert(data.message);
-      }catch(error){
-        alert("some thing went wrong")
-      }
-    }else{
-      if (loginInfo.mobile.length !== 10) {
-        alert("invalid mobile number");
-        return;
-      }
-      try{
-        const { data } = await client.post(
-          "/auth/sendVerificationToken",
-          {
-            mobile: loginInfo.mobile,
-          },
-          {
-            params: {
-              useAdhar: "no",
-              useMobile: "yes",
-            },
-          }
-        );
-          alert(data.message);
-      }catch(error){
-        alert("Something went wrong")
-      }
-      
-    }
-  }
 
+  const handleLogin = async () => {
+    try {
+      let response;
+      if (loginChoice === "aadhaar") {
+        response = await client.post("/auth/sign-in", {
+          adhar: loginInfo.aadhaar,
+          token: loginInfo.pin,
+        });
+      } else {
+        response = await client.post("/auth/sign-in", {
+          mobile: loginInfo.mobile,
+          token: loginInfo.pin,
+        });
+      }
+      localStorage.setItem("token", response.data.jwttoken);
+      navigate("/information");
+    } catch (error) {
+      alert("Invalid credentials. Please try again.");
+    }
+  };
+
+  const handleGetOtp = async () => {
+    let isValid = false;
+    if (loginChoice === "aadhaar") {
+      isValid = loginInfo.aadhaar.length === 12;
+    } else {
+      isValid = loginInfo.mobile.length === 10;
+    }
+    if (!isValid) {
+      alert("Invalid Aadhaar number or mobile number.");
+      return;
+    }
+
+    try {
+      const { data } = await client.post("/auth/sendVerificationToken", {
+        adhar: loginChoice === "aadhaar" ? loginInfo.aadhaar : null,
+        mobile: loginChoice === "mobile-number" ? loginInfo.mobile : null,
+      });
+      alert(data.message);
+    } catch (error) {
+      alert("Something went wrong. Please try again later.");
+    }
+  };
 
   return (
-    <>
-      <div className="flex items-center justify-center min-h-screen gap-5 bg-blue-300 ">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-300 to-indigo-500">
+      <div className="flex flex-col md:flex-row items-center justify-center md:w-[80%] w-full md:max-w-[800px] rounded-lg md:shadow-lg">
         <img
-          src="./src/assets/home_page.png"
-          alt="login page image"
-          className="hidden w-2/6 md:block"
+          src="./src/assets/home3.png"
+          alt="Login page"
+          className="flex items-center justify-center md:w-1/2 rounded-lg transition-transform transform hover:scale-105"
+          style={{ objectFit: "cover" }}
         />
-        <div className="md:w-[25%] w-[90vw]">
-          <Container className={" bg-white px-4 rounded-lg my-2 shadow-lg"}>
-            <h1 className="pt-5 pb-4 font-semibold ">
+
+        <div className="w-full">
+          <Container className="bg-white px-6 py-8 rounded-tl-none rounded-bl-none rounded-lg shadow-lg">
+            <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
               Log in to your account!
             </h1>
-            <div className="flex justify-center mb-4 ">
+            <div className="flex justify-center mb-6 space-x-2">
               <input
                 type="radio"
                 id="mobile-number"
@@ -140,14 +84,13 @@ function Login() {
               />
               <label
                 htmlFor="mobile-number"
-                className={`py-2 w-[50%] font-medium text-sm text-center
-          ${
-            loginChoice === "mobile-number"
-              ? "bg-[#116ACF] text-white"
-              : "bg-white text-blue-600"
-          } border-none rounded-lg`}
+                className={`py-2 w-1/2 font-medium text-center cursor-pointer transition-colors ${
+                  loginChoice === "mobile-number"
+                    ? "bg-blue-400 text-white"
+                    : "bg-gray-200 text-blue-700"
+                } rounded-l-lg hover:bg-blue-500 hover:text-white`}
               >
-                Moblie Number
+                Mobile Number
               </label>
               <input
                 type="radio"
@@ -160,70 +103,70 @@ function Login() {
               />
               <label
                 htmlFor="aadhaar"
-                className={`py-2 w-[50%] font-medium text-sm text-center
-           ${
-             loginChoice === "aadhaar"
-               ? "bg-[#116ACF] text-white"
-               : "bg-white text-blue-600"
-           } border-none rounded-lg`}
+                className={`py-2 w-1/2 font-medium text-center cursor-pointer transition-colors ${
+                  loginChoice === "aadhaar"
+                    ? "bg-blue-400 text-white"
+                    : "bg-gray-200 text-blue-700"
+                } rounded-r-lg hover:bg-blue-500 hover:text-white`}
               >
-                Aadhar number
+                Aadhaar Number
               </label>
             </div>
-            <div>
+            <div className="space-y-4">
               {loginChoice === "mobile-number" ? (
                 <input
                   type="text"
-                  className="block w-full px-3 py-1 my-2 text-sm outline-none border-[2px] focus:bg-[#E9ECF1] border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none "
+                  className="block w-full px-4 py-3 text-sm border rounded-lg focus:ring focus:ring-blue-500 outline-none"
                   placeholder="Mobile Number"
                   value={loginInfo.mobile}
-                  onChange={(e) => {
-                    setLoginInfo({ ...loginInfo, mobile: e.target.value });
-                  }}
+                  onChange={(e) =>
+                    setLoginInfo({ ...loginInfo, mobile: e.target.value })
+                  }
                 />
               ) : (
                 <input
                   type="text"
-                  className="block w-full px-3 py-1 my-2 text-sm outline-none border-[2px] focus:bg-[#E9ECF1] border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none "
-                  placeholder="Aadhaar"
+                  className="block w-full px-4 py-3 text-sm border rounded-lg focus:ring focus:ring-blue-500 outline-none"
+                  placeholder="Aadhaar Number"
                   value={loginInfo.aadhaar}
-                  onChange={(e) => {
-                    setLoginInfo({ ...loginInfo, aadhaar: e.target.value });
-                  }}
+                  onChange={(e) =>
+                    setLoginInfo({ ...loginInfo, aadhaar: e.target.value })
+                  }
                 />
               )}
-              <button className="self-end my-2 text-sm text-[#437BD0] " onClick={handleGetOtp}>
-                Get security PIN
+              <button
+                className="w-full text-sm font-medium text-blue-700 hover:underline"
+                onClick={handleGetOtp}
+              >
+                Get Security PIN
               </button>
-
               <input
                 type="text"
-                className="block w-full px-3 py-1 my-2 text-sm  outline-none border-[2px] focus:bg-[#E9ECF1] border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none "
-                placeholder="6 digit security PIN"
+                className="block w-full px-4 py-3 text-sm border rounded-lg focus:ring focus:ring-blue-500 outline-none"
+                placeholder="6-digit Security PIN"
                 value={loginInfo.pin}
-                onChange={(e) => {
-                  setLoginInfo({ ...loginInfo, pin: e.target.value });
-                }}
+                onChange={(e) =>
+                  setLoginInfo({ ...loginInfo, pin: e.target.value })
+                }
               />
-              <button className="bg-[#116ACF] text-[#E7FFF2] py-2 mt-2 mb-5 rounded-md w-[100%] " onClick={handlelogin}>
+              <button
+                className="w-full py-3 mt-4 font-semibold text-white bg-blue-700 rounded-lg shadow hover:bg-blue-800 transition-colors"
+                onClick={handleLogin}
+              >
                 Login
+              </button>
+              {/* Admin Login Button */}
+              <button
+                className="w-full py-3 mt-4 font-semibold text-white bg-green-500 rounded-lg shadow hover:bg-green-600 transition-colors"
+                onClick={() => navigate("/admin-login")}
+              >
+                Admin Login
               </button>
             </div>
           </Container>
-          {/* <div className="flex justify-center gap-1">
-            <h2 className="font-bold text-[#000005] ">
-              Do not have an account ?
-            </h2>
-            <button
-              className="text-[#4944D2] font-bold"
-              onClick={() => navigate("/signup")}
-            >
-              Sign Up
-            </button>
-          </div> */}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

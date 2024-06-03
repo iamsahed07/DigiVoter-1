@@ -43,3 +43,4 @@ export const giveVote = async (req: GiveVote, res: Response) => {
     res.status(400).json({ message: err.message, success: false });
   }
 };
+
