@@ -13,6 +13,7 @@ function Login() {
 
   const navigate = useNavigate();
 
+  
   const handleLogin = async () => {
     try {
       let response;
@@ -20,11 +21,21 @@ function Login() {
         response = await client.post("/auth/sign-in", {
           adhar: loginInfo.aadhaar,
           token: loginInfo.pin,
+        },{
+          params:{
+            useAdhar:'yes',
+            useMobile:'no'
+          }
         });
       } else {
         response = await client.post("/auth/sign-in", {
           mobile: loginInfo.mobile,
           token: loginInfo.pin,
+        },{
+          params:{
+            useAdhar:'no',
+            useMobile:'yes'
+          }
         });
       }
       localStorage.setItem("token", response.data.jwttoken);
@@ -33,7 +44,6 @@ function Login() {
       alert("Invalid credentials. Please try again.");
     }
   };
-
   const handleGetOtp = async () => {
     let isValid = false;
     if (loginChoice === "aadhaar") {
@@ -45,15 +55,35 @@ function Login() {
       alert("Invalid Aadhaar number or mobile number.");
       return;
     }
+    if(loginChoice==="aadhaar"){
+      try{
+        const { data } = await client.post("/auth/sendVerificationToken", {
+          adhar: loginInfo.aadhaar,
+        },{
+          params:{
+            useAdhar:'yes',
+            useMobile:'no'
+          }
+        });
+        alert(data.message);
+      }catch(error){
 
-    try {
-      const { data } = await client.post("/auth/sendVerificationToken", {
-        adhar: loginChoice === "aadhaar" ? loginInfo.aadhaar : null,
-        mobile: loginChoice === "mobile-number" ? loginInfo.mobile : null,
-      });
-      alert(data.message);
-    } catch (error) {
-      alert("Something went wrong. Please try again later.");
+      }
+    }else{
+      try {
+        const { data } = await client.post("/auth/sendVerificationToken", {
+          mobile: loginInfo.mobile,
+        },{
+          params:{
+            useAdhar:'no',
+            useMobile:"yes"
+          }
+        });
+        alert(data.message);
+      } catch (error) {
+        alert("Something went wrong. Please try again later.");
+      }
+
     }
   };
 

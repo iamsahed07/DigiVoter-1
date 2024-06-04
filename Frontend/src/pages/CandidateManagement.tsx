@@ -5,13 +5,21 @@ import PartyAPng from "../assets/party_logo/tmc.svg";
 import PartyBPng from "../assets/party_logo/inc.png";
 import PartyCPng from "../assets/party_logo/bjp.png";
 import PartyDPng from "../assets/party_logo/cpim.png";
+// import FormCandidateDialog from "../components/CreateCandidateDialog";
 
 const CandidateManagement = () => {
   const navigate = useNavigate();
 
-  const handleAddCandidate = () => {
-    navigate("/add-candidate");
-  };
+  // const handleAddCandidate = () => {
+  //   navigate("/add-candidate");
+  // };
+  const [open,setOpen] = React.useState(false)
+  const handleClickOpen = ()=>{
+    setOpen(true)
+  }
+  const handleClose = ()=>{
+    setOpen(false)
+  }
 
   const handleViewCandidates = () => {
     navigate("/view-candidates");
@@ -46,16 +54,18 @@ const CandidateManagement = () => {
           <div className="flex flex-wrap mb-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg mb-4 mr-4 transition duration-300 ease-in-out transform hover:scale-105"
-              onClick={handleAddCandidate}
+              onClick={handleClickOpen}
             >
               Add Candidate
             </button>
+            {/* <FormCandidateDialog open={open} handleClose={handleClose}></FormCandidateDialog> */}
             <button
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg mb-4 mr-4 transition duration-300 ease-in-out transform hover:scale-105"
-              onClick={handleViewCandidates}
+              onClick={handleClickOpen}
             >
               View Candidates
             </button>
+            
           </div>
           <div>
             <h3 className="text-2xl font-semibold mb-2">Existing Candidates</h3>

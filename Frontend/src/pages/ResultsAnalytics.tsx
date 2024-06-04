@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { Container } from "../components/Container";
 import { useNavigate } from "react-router-dom";
+import { Doughnut } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 
 // Import party symbols
 import Tmc from "../assets/party_logo/tmc.svg";
 import Inc from "../assets/party_logo/inc.png";
 import Bjp from "../assets/party_logo/bjp.png";
 import Cpim from "../assets/party_logo/cpim.png";
-// import PartyB from "../assets/party-b.png";
-// import PartyC from "../assets/party-c.png";
-// import PartyD from "../assets/party-d.png";
-// import PartyE from "../assets/party-e.png";
-// import PartyF from "../assets/party-f.png";
-// import PartyG from "../assets/party-g.png";
 
 const ResultsAnalytics = () => {
   const navigate = useNavigate();
@@ -26,12 +22,6 @@ const ResultsAnalytics = () => {
     { id: 2, candidate: "Candidate B", party: "INC", votes: 1000, logo: Inc },
     { id: 3, candidate: "Candidate C", party: "BJP", votes: 800, logo: Bjp },
     { id: 4, candidate: "Candidate D", party: "CPIM", votes: 700, logo: Cpim },
-    // { id: 5, candidate: "Candidate E", party: "Party B", votes: 600, logo: PartyB },
-    // { id: 6, candidate: "Candidate F", party: "Party C", votes: 500, logo: PartyC },
-    // { id: 7, candidate: "Candidate G", party: "Party D", votes: 400, logo: PartyD },
-    // { id: 8, candidate: "Candidate H", party: "Party E", votes: 300, logo: PartyE },
-    // { id: 9, candidate: "Candidate I", party: "Party F", votes: 200, logo: PartyF },
-    // { id: 10, candidate: "Candidate J", party: "Party G", votes: 100, logo: PartyG },
   ];
 
   const handleSelectElection = (e) => {
@@ -42,6 +32,39 @@ const ResultsAnalytics = () => {
   const handleSelectAssembly = (e) => {
     setSelectedAssembly(e.target.value);
     console.log("Selected assembly:", e.target.value);
+  };
+
+  // Data for the semi-circle vote meter
+  const voteData = {
+    labels: electionResults.map((result) => result.party),
+    datasets: [
+      {
+        data: electionResults.map((result) => result.votes),
+        backgroundColor: ["#3498DB", "#E74C3C", "#F1C40F", "#8E44AD"], // Premium colors for TMC, INC, BJP, CPIM respectively
+        borderColor: "#FFFFFF",
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const options = {
+    rotation: -90,
+    circumference: 180,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          color: '#333',
+          font: {
+            size: 14,
+            family: 'Helvetica Neue, Helvetica, Arial, sans-serif',
+          },
+        },
+      },
+    },
+    maintainAspectRatio: false,
+    responsive: true,
   };
 
   return (
@@ -78,6 +101,16 @@ const ResultsAnalytics = () => {
                   <option value="Assembly 3">Assembly 3</option>
                   <option value="Assembly 4">Assembly 4</option>
                 </select>
+              </div>
+            </div>
+            <div className="mb-6">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-2 text-gray-800">
+                Vote Distribution
+              </h2>
+              <div className="w-full flex justify-center items-center" style={{ height: '150px' }}>
+                <div className="w-1/2 p-4 bg-white shadow-md rounded-lg transition duration-300 hover:shadow-lg transform hover:scale-105">
+                  <Doughnut data={voteData} options={options} />
+                </div>
               </div>
             </div>
             <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-gray-800 border-b-2 border-gray-300 pb-2">
