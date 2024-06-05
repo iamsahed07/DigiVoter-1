@@ -10,7 +10,7 @@ import { FaUsers } from "react-icons/fa";
 export const DrawerAdmin = () => {
   const navigate = useNavigate();
   const logoutHandler = () => {
-    const result = confirm("Are you sure, you want to logout?");
+    const result = confirm("Are you sure you want to log out?");
     if (result) {
       navigate("/");
       localStorage.clear();
@@ -23,8 +23,8 @@ export const DrawerAdmin = () => {
           to="admin-dashboard"
           className={({ isActive }) =>
             isActive
-              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#00BDDA] text-[#E5F8FB] rounded-md"
-              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#B3E6F2] hover:text-[#007C92] hover:rounded-md"
+              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#4a90e2] text-white rounded-md"
+              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#3498db] hover:text-white hover:rounded-md"
           }
         >
           <IconContext.Provider value={{ size: "1.5em" }}>
@@ -36,8 +36,8 @@ export const DrawerAdmin = () => {
           to="election-management"
           className={({ isActive }) =>
             isActive
-              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#00BDDA] text-[#E5F8FB] rounded-md"
-              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#B3E6F2] hover:text-[#007C92] hover:rounded-md"
+              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#4a90e2] text-white rounded-md"
+              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#3498db] hover:text-white hover:rounded-md"
           }
         >
           <IconContext.Provider value={{ size: "1.5em" }}>
@@ -49,8 +49,8 @@ export const DrawerAdmin = () => {
           to="candidate-management"
           className={({ isActive }) =>
             isActive
-              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#00BDDA] text-[#E5F8FB] rounded-md"
-              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#B3E6F2] hover:text-[#007C92] hover:rounded-md"
+              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#4a90e2] text-white rounded-md"
+              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#3498db] hover:text-white hover:rounded-md"
           }
         >
           <IconContext.Provider value={{ size: "1.5em" }}>
@@ -62,8 +62,8 @@ export const DrawerAdmin = () => {
           to="voter-management"
           className={({ isActive }) =>
             isActive
-              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#00BDDA] text-[#E5F8FB] rounded-md"
-              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#B3E6F2] hover:text-[#007C92] hover:rounded-md"
+              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#4a90e2] text-white rounded-md"
+              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#3498db] hover:text-white hover:rounded-md"
           }
         >
           <IconContext.Provider value={{ size: "1.5em" }}>
@@ -75,8 +75,8 @@ export const DrawerAdmin = () => {
           to="results-analytics"
           className={({ isActive }) =>
             isActive
-              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#00BDDA] text-[#E5F8FB] rounded-md"
-              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#B3E6F2] hover:text-[#007C92] hover:rounded-md"
+              ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#4a90e2] text-white rounded-md"
+              : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#3498db] hover:text-white hover:rounded-md"
           }
         >
           <IconContext.Provider value={{ size: "1.5em" }}>
@@ -85,7 +85,7 @@ export const DrawerAdmin = () => {
           <h3 className="ml-2">Results / Analytics</h3>
         </NavLink>
         <div
-          className="flex py-2 px-3 my-2 w-[100%] hover:bg-[#B3E6F2] rounded-md cursor-pointer"
+          className="flex py-2 px-3 my-2 w-[100%] hover:bg-[#3498db] hover:text-white hover:rounded-md"
           onClick={logoutHandler}
         >
           <IconContext.Provider value={{ size: "1.5em" }}>
@@ -97,9 +97,4 @@ export const DrawerAdmin = () => {
     </div>
   );
 };
-// to="logout"
-//           className={({ isActive }) =>
-//             isActive
-//               ? "flex py-2 px-3 my-2 shadow-xl w-[100%] bg-[#00BDDA] text-[#E5F8FB] rounded-md"
-//               : "flex py-2 px-3 w-[100%] my-2 hover:bg-[#B3E6F2] hover:text-[#007C92] hover:rounded-md"
-//           }
+

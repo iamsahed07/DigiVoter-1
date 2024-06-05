@@ -5,19 +5,19 @@ import { useNavigate } from "react-router-dom";
 const ElectionManagement = () => {
   const navigate = useNavigate();
 
-  const handleCreateElection = () => {
-    navigate("/create-election");
+  const handleAddElection = () => {
+    navigate("/add-election");
   };
 
   const handleViewElections = () => {
     navigate("/view-elections");
   };
 
-  const handleEditElection = (electionId) => {
+  const handleEditElection = (electionId: number) => {
     navigate(`/edit-election/${electionId}`);
   };
 
-  const handleRemoveElection = (electionId) => {
+  const handleRemoveElection = (electionId: number) => {
     // Implement remove logic
     console.log(`Removing election with id: ${electionId}`);
   };
@@ -41,9 +41,9 @@ const ElectionManagement = () => {
           <div className="flex flex-wrap mb-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg mb-4 mr-4 transition duration-300 ease-in-out transform hover:scale-105"
-              onClick={handleCreateElection}
+              onClick={handleAddElection}
             >
-              Create Election
+              Add Election
             </button>
             <button
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg mb-4 mr-4 transition duration-300 ease-in-out transform hover:scale-105"

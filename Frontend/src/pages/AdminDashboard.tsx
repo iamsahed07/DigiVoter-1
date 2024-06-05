@@ -104,25 +104,24 @@ const AdminDashboard = () => {
   };
 
   return (
-    
     <div className="min-h-screen flex flex-col w-3/4 float-right mr-10 mt-10">
-    <Container className="bg-gray-50 col-start-2 col-end-12 mb-6 shadow-lg rounded-lg">
+      <Container className="bg-gray-50 col-start-2 col-end-12 mb-6 rounded-lg shadow-lg p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-blue-500 text-white p-4 rounded shadow">
-            <h2 className="text-xl font-bold">Total Voters</h2> {/* Changed to "Total Voters" */}
-            <p className="text-3xl">{stats.totalVoters}</p> {/* Changed to "totalVoters" */}
+          <div className="bg-blue-500 text-white rounded-lg shadow-lg p-6">
+            <h2 className="text-xl font-bold">Total Voters</h2>
+            <p className="text-3xl">{stats.totalVoters}</p>
           </div>
-          <div className="bg-green-500 text-white p-4 rounded shadow">
+          <div className="bg-green-500 text-white rounded-lg shadow-lg p-6">
             <h2 className="text-xl font-bold">Total Votes</h2>
             <p className="text-3xl">{stats.totalVotes}</p>
           </div>
-          <div className="bg-yellow-500 text-white p-4 rounded shadow">
+          <div className="bg-yellow-500 text-white rounded-lg shadow-lg p-6">
             <h2 className="text-xl font-bold">Active Elections</h2>
             <p className="text-3xl">{stats.activeElections}</p>
           </div>
         </div>
         
-        <div className="bg-white shadow rounded-lg overflow-hidden mb-6">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
           <div className="p-4 bg-gray-100 border-b">
             <h3 className="text-lg font-semibold">Recent Activities</h3>
           </div>
@@ -138,13 +137,13 @@ const AdminDashboard = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="bg-white shadow rounded-lg overflow-hidden p-6">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden p-6">
             <h3 className="text-lg font-semibold mb-4">Vote Distribution</h3>
             <div className="w-64 h-64 mx-auto">
               <Pie ref={pieChartRef} data={pieData} options={pieOptions} />
             </div>
           </div>
-          <div className="bg-white shadow rounded-lg overflow-hidden p-6">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden p-6">
             <h3 className="text-lg font-semibold mb-4">National Voter Turnout</h3>
             <div className="w-full h-64 mx-auto">
               <Line ref={lineChartRef} data={lineData} options={lineOptions} />

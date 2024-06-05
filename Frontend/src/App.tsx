@@ -21,6 +21,9 @@ import { VotingResult } from "./pages/VotingResult";
 import ElectionLayout from "./components/ElectionLayout";
 import Candidate from "./pages/Candidate";
 import Profile from "./pages/Profile";
+import AddCandidate from "./components/AddCandidate";
+import AddElection from "./components/AddElection";
+import AddVoter from "./components/AddVoter";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,6 +56,9 @@ const router = createBrowserRouter(
         <Route path="candidate-management" element={<CandidateManagement />} />
         <Route path="voter-management" element={<VoterManagement />} />
         <Route path="results-analytics" element={<ResultsAnalytic />} />
+        <Route path="add-candidate" element={<AddCandidate/>} />
+        <Route path="add-election" element={<AddElection/>} />
+        <Route path="add-voter" element={<AddVoter/>} />
       </Route>
 
     </Route>
