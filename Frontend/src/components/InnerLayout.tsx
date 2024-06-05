@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
-import { Drawer } from './Drawer'
+import { DrawerVoter } from './DrawerVoter'
 
 export const InnerLayout = () => {
   return (
     <>
     <div className='pt-12'>
-    <Drawer/>
+    <DrawerVoter/>
     <Outlet/>
     </div>
     </>

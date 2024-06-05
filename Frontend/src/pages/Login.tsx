@@ -39,7 +39,7 @@ function Login() {
         });
       }
       localStorage.setItem("token", response.data.jwttoken);
-      navigate("/information");
+      navigate("/home");
     } catch (error) {
       alert("Invalid credentials. Please try again.");
     }
