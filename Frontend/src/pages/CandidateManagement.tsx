@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "../components/Container";
 import { useNavigate } from "react-router-dom";
-import PartyAPng from "../assets/party_logo/tmc.svg";
+import PartyAPng from "../assets/party_logo/tmc.png";
 import PartyBPng from "../assets/party_logo/inc.png";
 import PartyCPng from "../assets/party_logo/bjp.png";
 import PartyDPng from "../assets/party_logo/cpim.png";
