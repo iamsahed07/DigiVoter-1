@@ -1,6 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
-import { HiOutlineInformationCircle } from "react-icons/hi";
 import { FaCheckSquare } from "react-icons/fa";
 import { MdHowToVote } from "react-icons/md";
 import { MdPoll } from "react-icons/md";
@@ -75,7 +74,7 @@ export const DrawerVoter = () => {
           <h3 className="ml-2">Voting Area</h3>
         </NavLink>
         <NavLink
-          to="voting-result"
+          to="voting-results"
           className={({ isActive }) =>
             isActive
               ? "flex py-2 px-3 my-2 shadow-xl w-full bg-[#4a90e2] text-white rounded-md"

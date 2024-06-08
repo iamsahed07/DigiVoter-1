@@ -34,10 +34,12 @@ export const VoterRegistration = () => {
   },[]);
   return (
     <div className="flex flex-col w-3/4 float-right mr-10 mt-10">
-      <Container className="bg-white col-start-2 col-end-10 mt-1 mb-6 shadow-2xl pb-5 pr-1 h-1/4">
-        <div className="bg-blue-500 mx-5 text-center text-white rounded-b-md shadow-lg h-9">
-          <h1 className="py-1 text-lg">REGISTRATION</h1>
-        </div>
+    <Container
+        className={"bg-white col-start-2 col-end-12 mt-1 mb-6 shadow-2xl"}
+      >
+        <div className="bg-blue-500 text-center text-white rounded-t-md shadow-lg">
+        <h1 className="py-2 text-lg font-bold">Voter Registration</h1>
+      </div>
         <div className="mt-5 ml-8 grid-cols-10 flex-col ">
           <input
             className="outline-none border-b-2 border-gray-300"

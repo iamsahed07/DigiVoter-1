@@ -10,7 +10,12 @@ export default function Profile() {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col w-full md:w-3/4 md:float-right md:mr-10 h-screen mt-10">
-      <Container className="bg-white shadow-2xl p-5 rounded-lg">
+      <Container
+        className={"bg-white col-start-2 col-end-12 mt-1 mb-6 shadow-2xl"}
+      >
+        <div className="bg-blue-500 text-center text-white rounded-t-md shadow-lg">
+        <h1 className="py-2 text-lg font-bold">Your Profile</h1>
+      </div>
         <div className="flex items-center">
           <img
             // src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqX5-Bk8Cxg5Cam2G8AIwPv2kaNOw8Vm1DKw&usqp=CAU"

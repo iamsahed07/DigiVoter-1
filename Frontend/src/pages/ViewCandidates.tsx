@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "../components/Container";
 import { useNavigate } from "react-router-dom";
 
-export const Information = () => {
+const ViewCandidates = () => {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col w-3/4 float-right mr-10 mt-10">
@@ -50,3 +50,5 @@ export const Information = () => {
     </div>
   );
 };
+
+export default ViewCandidates;
