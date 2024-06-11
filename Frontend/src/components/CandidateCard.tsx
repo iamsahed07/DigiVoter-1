@@ -1,7 +1,5 @@
-// CandidateCard.tsx
-
 import React from 'react';
-import * as CandidatePhotos from "../components/CandidatePhotos";
+import CandidatePhotos from "../components/CandidatePhotos"; // Corrected import path
 import PartyColors from "../components/PartyColors";
 import { Aitmc, Inc, Bjp, Cpim, Aap, Sjp, Rjp } from "../components/PartySymbols"; // Corrected import path
 
@@ -18,12 +16,12 @@ const CandidateCard = ({ id, photoKey, name, party, age }) => {
   };
 
   // Mapping photo key to the respective photo
-  const candidatePhoto = CandidatePhotos[photoKey];
+  const CandidatePhoto = CandidatePhotos[photoKey]; // Changed variable name to singular form
 
   // Mapping party to the respective symbol component
   let PartySymbol;
   switch (party) {
-    case "All India Trinamool Congress (AITMC)": // Corrected party name
+    case "All India Trinamool Congress (AITMC)":
       PartySymbol = Aitmc;
       break;
     case "Indian National Congress (INC)":
@@ -52,7 +50,7 @@ const CandidateCard = ({ id, photoKey, name, party, age }) => {
     <div className="bg-white shadow-md rounded-lg overflow-hidden">
       {/* Candidate photo */}
       <div className="flex justify-center">
-        <img src={candidatePhoto} alt="Candidate" className="w-full h-auto" />
+        <CandidatePhoto /> {/* Changed component name to singular form */}
       </div>
       {/* Party color horizontal line */}
       <div style={{ backgroundColor: color, height: '4px' }}></div>
@@ -69,12 +67,12 @@ const CandidateCard = ({ id, photoKey, name, party, age }) => {
           <p className="text-gray-700">Party: {party}</p>
         </div>
         {/* Party symbol */}
-        <div className="ml-4" style={{ width: "1.5cm", height: "1.5cm" }}>
+        <div className="ml-4" style={{ width: "2.5cm", height: "2.5cm" }}>
           <PartySymbol />
         </div>
       </div>
       {/* Search button */}
-      <div className="p-4 flex justify-end">
+      <div className="p-4 flex justify-center"> {/* Adjusted position to center */}
         <button
           onClick={handleGoogleSearch}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
