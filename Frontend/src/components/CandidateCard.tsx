@@ -1,18 +1,13 @@
+// CandidateCard.tsx
+
 import React from 'react';
-import { Tmc, Inc, Bjp, Cpim, Aap, Sjp, Rjp } from "../components/PartySymbol";
 import * as CandidatePhotos from "../components/CandidatePhotos";
+import PartyColors from "../components/PartyColors";
+import { Aitmc, Inc, Bjp, Cpim, Aap, Sjp, Rjp } from "../components/PartySymbols"; // Corrected import path
 
 const CandidateCard = ({ id, photoKey, name, party, age }) => {
-  // Mapping party names to their respective symbols
-  const partySymbolMap = {
-    "All India Trinamool Congress": <Tmc />,
-    "Indian National Congress": <Inc />,
-    "Bharatiya Janata Party": <Bjp />,
-    "Shiv Sena": <Cpim />,
-    "Aam Aadmi Party": <Aap />,
-    "Nationalist Congress Party": <Sjp />,
-    "Biju Janata Dal": <Rjp />,
-  };
+  // Get the party color
+  const color = PartyColors[party] || "#CCCCCC";
 
   // Function to handle the Google search
   const handleGoogleSearch = () => {
@@ -25,12 +20,42 @@ const CandidateCard = ({ id, photoKey, name, party, age }) => {
   // Mapping photo key to the respective photo
   const candidatePhoto = CandidatePhotos[photoKey];
 
+  // Mapping party to the respective symbol component
+  let PartySymbol;
+  switch (party) {
+    case "All India Trinamool Congress (AITMC)": // Corrected party name
+      PartySymbol = Aitmc;
+      break;
+    case "Indian National Congress (INC)":
+      PartySymbol = Inc;
+      break;
+    case "Bharatiya Janata Party (BJP)":
+      PartySymbol = Bjp;
+      break;
+    case "Communist Party of India (Marxist) (CPIM)":
+      PartySymbol = Cpim;
+      break;
+    case "Aam Aadmi Party (AAP)":
+      PartySymbol = Aap;
+      break;
+    case "Samajwadi Party (SJP)":
+      PartySymbol = Sjp;
+      break;
+    case "Rashtriya Janata Party (RJP)":
+      PartySymbol = Rjp;
+      break;
+    default:
+      PartySymbol = () => null;
+  }
+
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden">
       {/* Candidate photo */}
       <div className="flex justify-center">
         <img src={candidatePhoto} alt="Candidate" className="w-full h-auto" />
       </div>
+      {/* Party color horizontal line */}
+      <div style={{ backgroundColor: color, height: '4px' }}></div>
       {/* Candidate details */}
       <div className="p-4 flex items-center justify-between">
         <div>
@@ -45,14 +70,14 @@ const CandidateCard = ({ id, photoKey, name, party, age }) => {
         </div>
         {/* Party symbol */}
         <div className="ml-4" style={{ width: "1.5cm", height: "1.5cm" }}>
-          {partySymbolMap[party]}
+          <PartySymbol />
         </div>
       </div>
       {/* Search button */}
       <div className="p-4 flex justify-end">
         <button
           onClick={handleGoogleSearch}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
         >
           Search
         </button>

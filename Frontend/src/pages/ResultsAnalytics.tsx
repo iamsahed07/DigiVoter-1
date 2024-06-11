@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container } from "../components/Container";
 import { Doughnut } from "react-chartjs-2";
 import Select from "react-select";
-import { Tmc, Inc, Bjp, Cpim, Aap, Sjp, Rjp } from "../components/PartySymbol";
+import { Aitmc, Inc, Bjp, Cpim, Aap, Sjp, Rjp } from "../components/PartySymbols";
 
 const ResultsAnalytics = () => {
   const [selectedElection, setSelectedElection] = useState(null);
@@ -75,7 +75,7 @@ const ResultsAnalytics = () => {
       id: 1,
       party: "All India Trinamool Congress (TMC)",
       votes: 1000,
-      logo: <Tmc />,
+      logo: <Aitmc />,
     },
     {
       id: 2,

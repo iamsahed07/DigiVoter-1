@@ -3,7 +3,7 @@ import { Container } from "../components/Container";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getAuthState } from "../store/auth";
-import { Tmc, Inc, Bjp, Cpim, Aap, Sjp, Rjp } from "../components/PartySymbol";
+import { Aitmc, Inc, Bjp, Cpim, Aap, Sjp, Rjp } from "../components/PartySymbols";
 import * as CandidatePhotos from "../components/CandidatePhotos";
 import { ImArrowLeft } from "react-icons/im";
 
@@ -29,7 +29,7 @@ const candidatesData = [
     name: "Mamata Banerjee",
     party: "All India Trinamool Congress",
     photo: CandidatePhotos.Candidate3,
-    partySymbol: Tmc,
+    partySymbol: Aitmc,
     color: "#008000",
   },
   {
