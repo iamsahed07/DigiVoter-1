@@ -25,6 +25,7 @@ import { InnerLayoutAdmin } from "./components/InnerLayoutAdmin";
 import { Information } from "./pages/Information";
 import { VoterRegistration } from "./pages/VoterRegistration";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<OuterLayout />}>
@@ -39,9 +40,8 @@ const router = createBrowserRouter(
         <Route path="/information" element={<Information />} />
         <Route path="/voter-registration" element={<VoterRegistration />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/voting-area" element={<VotingArea />}>
-          <Route path="cast-vote" element={<CastVote />} />
-        </Route>
+        <Route path="/voting-area" element={<VotingArea />} /> 
+        <Route path="/cast-vote" element={<CastVote />} />
         <Route path="/voting-results" element={<VotingResults />} />
       </Route>
 

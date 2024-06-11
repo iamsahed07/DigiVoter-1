@@ -44,7 +44,7 @@ const CandidateCard = ({ id, photoKey, name, party, age }) => {
           <p className="text-gray-700">Party: {party}</p>
         </div>
         {/* Party symbol */}
-        <div className="ml-4" style={{ width: "2.5cm", height: "2.5cm" }}>
+        <div className="ml-4" style={{ width: "1.5cm", height: "1.5cm" }}>
           {partySymbolMap[party]}
         </div>
       </div>

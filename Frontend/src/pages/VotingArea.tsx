@@ -14,7 +14,7 @@ const candidatesData = {
   "1": [
     {
       id: "1",
-      name: "Rahul Kumar",
+      name: "Rahul Gandhi",
       party: "Indian National Congress",
       photoKey: "Candidate1",
       age: 40,
@@ -43,22 +43,22 @@ const candidatesData = {
     },
     {
       id: "5",
-      name: "Sharad Pawar",
-      party: "Nationalist Congress Party",
+      name: "Akhilesh Yadav",
+      party: "Samajwadi Party",
       photoKey: "Candidate5",
       age: 80,
     },
     {
       id: "6",
-      name: "Uddhav Thackeray",
-      party: "Shiv Sena",
+      name: "Biman Bose",
+      party: "Communist Party of India (Marxist) (CPIM)",
       photoKey: "Candidate6",
       age: 60,
     },
     {
       id: "7",
-      name: "Naveen Patnaik",
-      party: "Biju Janata Dal",
+      name: "Shankersinh Vaghela",
+      party: "Rashtriya Janata Party (RJP)",
       photoKey: "Candidate7",
       age: 75,
     },

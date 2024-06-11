@@ -1,12 +1,12 @@
 import React from 'react';
 
 // Import party logos
-import TmcLogo from '../assets/party_logo/tmc.png';
 import IncLogo from '../assets/party_logo/inc.png';
 import BjpLogo from '../assets/party_logo/bjp.png';
-import CpimLogo from '../assets/party_logo/cpim.png';
+import TmcLogo from '../assets/party_logo/tmc.png';
 import AapLogo from '../assets/party_logo/aap.png';
 import SjpLogo from '../assets/party_logo/sjp.png';
+import CpimLogo from '../assets/party_logo/cpim.png';
 import RjpLogo from '../assets/party_logo/rjd.png';
 
 // Define functional components for each party symbol
