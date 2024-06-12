@@ -15,7 +15,7 @@ export interface UserProfile {
   age: number;
   assembly: string;
   state: string;
-  imageurl: string;
+  imageurl: string | null;
 }
 
 interface AuthState {

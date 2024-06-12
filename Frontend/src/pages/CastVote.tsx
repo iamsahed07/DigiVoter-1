@@ -6,6 +6,7 @@ import { getAuthState } from "../store/auth";
 import { Aitmc, Inc, Bjp, Cpim, Aap, Sjp, Rjp } from "../components/PartySymbols";
 import * as CandidatePhotos from "../components/CandidatePhotos";
 import { ImArrowLeft } from "react-icons/im";
+import client from "../api/client";
 
 const candidatesData = [
   {
@@ -46,7 +47,7 @@ const candidatesData = [
     party: "Samajwadi Party",
     photo: CandidatePhotos.Candidate5,
     partySymbol: Sjp,
-    color: "#0000FF", // Example color as NCP is not listed, using blue
+    color: "#0000FF",
   },
   {
     id: "6",
@@ -54,7 +55,7 @@ const candidatesData = [
     party: "Communist Party of India (Marxist) (CPIM)",
     photo: CandidatePhotos.Candidate6,
     partySymbol: Cpim,
-    color: "#800080", // Example color as Shiv Sena is not listed, using purple
+    color: "#800080",
   },
   {
     id: "7",
@@ -62,7 +63,7 @@ const candidatesData = [
     party: "Rashtriya Janata Party (RJP)",
     photo: CandidatePhotos.Candidate7,
     partySymbol: Rjp,
-    color: "#008000", // Example color as BJD is not listed, using green
+    color: "#008000",
   },
 ];
 
@@ -70,10 +71,61 @@ export default function CastVote() {
   const { profile } = useSelector(getAuthState);
   const navigate = useNavigate();
   const [votedCandidateId, setVotedCandidateId] = useState(null);
+  const [showOtpPopup, setShowOtpPopup] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
 
-  const handleVoteClick = (candidateId) => {
+  const handleVoteClick = async (candidateId) => {
     setVotedCandidateId(candidateId);
-    // Perform other actions related to voting like showing the OTP popup, etc.
+    setTimeout(() => {
+      setShowOtpPopup(true);
+    }, 1000);
+
+    try {
+      const response = await client.post("/auth/sendVerificationToken", {
+        adhar: profile?.adhar,
+      },{
+        params:{
+          useAdhar: 'yes',
+          useMobile: 'no'
+        }
+      });
+      alert(response.data.message);
+    } catch (error) {
+      alert("Failed to send OTP. Please try again.");
+    }
+  };
+
+  const handleOtpChange = (e) => {
+    setOtp(e.target.value);
+  };
+
+  const handleOtpSubmit = async () => {
+    setIsVerifying(true);
+    try {
+      const response = await client.post("/auth/verifyToken", {
+        adhar: profile.aadhaar,
+        token: otp,
+      },{
+        params:{
+          useAdhar: 'yes',
+          useMobile: 'no'
+        }
+      });
+
+      if (response.data.success) {
+        alert("Vote counted successfully!");
+        // Perform additional actions like updating the backend with the vote
+      } else {
+        alert("Invalid OTP. Please try again.");
+      }
+      setShowOtpPopup(false);
+      setIsVerifying(false);
+      setOtp("");
+    } catch (error) {
+      alert("Failed to verify OTP. Please try again.");
+      setIsVerifying(false);
+    }
   };
 
   return (
@@ -114,10 +166,10 @@ export default function CastVote() {
               />
               <button
                 className={`ml-4 text-sm bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-600 transition duration-300 ease-in-out ${
-                  votedCandidateId === candidate.id ? "opacity-50 cursor-not-allowed" : ""
+                  votedCandidateId ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 onClick={() => handleVoteClick(candidate.id)}
-                disabled={votedCandidateId === candidate.id}
+                disabled={votedCandidateId !== null}
               >
                 Vote
               </button>
@@ -125,6 +177,30 @@ export default function CastVote() {
           ))}
         </div>
       </Container>
+      {showOtpPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-lg font-semibold mb-4">Check your Aadhaar registered email to verify OTP</h2>
+            <input
+              type="text"
+              value={otp}
+              onChange={handleOtpChange}
+              className="border p-2 rounded w-full mb-4"
+              placeholder="Enter 6-digit OTP"
+              maxLength="6"
+            />
+            <button
+              onClick={handleOtpSubmit}
+              className={`bg-blue-500 text-white px-4 py-2 rounded ${
+                isVerifying ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={isVerifying}
+            >
+              {isVerifying ? "Verifying..." : "Submit"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

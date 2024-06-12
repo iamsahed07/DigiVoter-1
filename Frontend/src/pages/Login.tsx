@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Container } from "../components/Container";
 import { useNavigate } from "react-router-dom";
 import client from "../api/client";
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../store/auth";
 
 function Login() {
+  const dispatch = useDispatch();
   const [loginChoice, setLoginChoice] = useState("aadhaar");
   const [loginInfo, setLoginInfo] = useState({
     mobile: "",
@@ -39,7 +42,8 @@ function Login() {
         });
       }
       localStorage.setItem("token", response.data.jwttoken);
-      navigate("/home");
+      dispatch(updateProfile(response.data))
+      navigate("/home")
     } catch (error) {
       alert("Invalid credentials. Please try again.");
     }
