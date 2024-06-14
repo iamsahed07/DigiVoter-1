@@ -1,7 +1,11 @@
 {
-  "dependencies": {
-    "chart.js": "^4.4.3",
-    "react-chartjs-2": "^5.2.0",
-    "react-select": "^5.8.0"
+  "scripts": {
+    "start:backend": "cd server && npm start",
+    "start:frontend": "cd Frontend && npm run dev",
+    "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start":"npm run start:all"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
